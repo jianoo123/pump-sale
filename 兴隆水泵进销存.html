@@ -98,10 +98,12 @@
             position: relative;
 
         }
+        #salesTable{
+            text-align: center;
+        }
         .tablechecked{
-        background-color: #b8daff;
-        color:white;
-        
+            background-color: #b8daff;
+            color:white;                
         }
         .dropdown-menu {
             left: auto;
@@ -327,16 +329,16 @@
             window.location.href = this.href
         });
         //表单点击行选中复选框
-        $("table").on("click", "tr", function () {
+        $("tbody").on("click", "tr", function () {
         if($(this).find("input").eq(0).is(':checked')){
             $(this).find("input").eq(0).prop('checked', false);
             $(this).eq(0).removeClass("tablechecked");
         }
         else{
-        var trs = $(this).parent("tbody").find('tr').find("input");
-        trs.prop('checked', false);
+        var trs = $(this).find("input");
+        $(this).parent("tbody").find('tr input').prop('checked', false);
         $(this).parent("tbody").find('tr').removeClass("tablechecked");
-        $(this).find("input").eq(0).prop('checked', true);
+        trs.eq(0).prop('checked', true);
         $(this).eq(0).addClass("tablechecked");
             }
     });

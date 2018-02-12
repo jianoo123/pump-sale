@@ -98,13 +98,16 @@
             position: relative;
 
         }
-        #salesTable{
+
+        #salesTable {
             text-align: center;
         }
-        .tablechecked{
+
+        .tablechecked {
             background-color: #b8daff;
-            color:white;                
+            color: white;
         }
+
         .dropdown-menu {
             left: auto;
         }
@@ -203,7 +206,7 @@
                 <li class="nav-item operateNav-item">
                     <a class="nav-link" href="#">增加</a>
                 </li>
-                <li class="nav-item operateNav-item">
+                <li class="nav-item operateNav-item modifyTable">
                     <a class="nav-link" href="#">修改</a>
                 </li>
                 <div class="nav-item operateNav-item" id="checktime">
@@ -221,28 +224,28 @@
                         <input id="client" type="text" name="" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="客户">
                         <ul class="dropdown-menu" data-toggle="dropdown" id="clientmenu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item" href="?aaa" data-toggle="dropdown"></a>
+                                <a class="dropdown-item" href="" data-toggle="dropdown" value="allclient">显示全部</a>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item" href="?aaa" data-toggle="dropdown">Action</a>
+                                <a class="dropdown-item" href="" data-toggle="dropdown">Action</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="?aaaa">123</a>
+                                    <a class="dropdown-item" href="">123</a>
                                     <a class="dropdown-item" href="#">An1231n</a>
                                     <a class="dropdown-item" href="#">Som12321here</a>
                                 </div>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item" href="?aaa" data-toggle="dropdown">Action2</a>
+                                <a class="dropdown-item" href="" data-toggle="dropdown">Action2</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="?aaaa">dfghdfg</a>
+                                    <a class="dropdown-item" href="">dfghdfg</a>
                                     <a class="dropdown-item" href="#">An1231n</a>
                                     <a class="dropdown-item" href="#">Som12321here</a>
                                 </div>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item" href="?aaa" data-toggle="dropdown">Action3</a>
+                                <a class="dropdown-item" href="" data-toggle="dropdown">Action3</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="?aaaa">asdads</a>
+                                    <a class="dropdown-item" href="">asdads</a>
                                     <a class="dropdown-item" href="#">An1231n</a>
                                     <a class="dropdown-item" href="#">Som12321here</a>
                                 </div>
@@ -273,17 +276,17 @@
                         <td>
                             <input type="checkbox">
                         </td>
-                        <td>1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
                     </tr>
                     <tr>
                         <td>
                             <input type="checkbox">
                         </td>
-                        <th>2</th>
+                        <td>2</td>
                         <td>Jacob</td>
                         <td>Thornton</td>
                         <td>@fat</td>
@@ -293,7 +296,7 @@
                         <td>
                             <input type="checkbox">
                         </td>
-                        <th>2</th>
+                        <td>2</td>
                         <td>Jacob</td>
                         <td>Thornton</td>
                         <td>@fat</td>
@@ -303,7 +306,7 @@
                         <td>
                             <input type="checkbox">
                         </td>
-                        <th style="z-index: 10;">2</th>
+                        <td>2</td>
                         <td>Jacob</td>
                         <td>Thornton</td>
                         <td>@fat</td>
@@ -313,7 +316,7 @@
                         <td>
                             <input type="checkbox">
                         </td>
-                        <th scope="row">2</th>
+                        <td scope="row">2</td>
                         <td>Jacob</td>
                         <td>Thornton</td>
                         <td>@fat</td>
@@ -326,22 +329,29 @@
     <script>
         // 客户下拉表单写入input
         $("#clientmenu").on("click", "a", function () {
-            window.location.href = this.href
+            indexHref = window.location.href.split('?')[0];
+            window.location.href = indexHref + '?client='+$(this).text();
         });
+        //加载网页取消所有单据勾选
+        $("tbody").find('tr input').prop('checked', false);
         //表单点击行选中复选框
         $("tbody").on("click", "tr", function () {
-        if($(this).find("input").eq(0).is(':checked')){
-            $(this).find("input").eq(0).prop('checked', false);
-            $(this).eq(0).removeClass("tablechecked");
-        }
-        else{
-        var trs = $(this).find("input");
-        $(this).parent("tbody").find('tr input').prop('checked', false);
-        $(this).parent("tbody").find('tr').removeClass("tablechecked");
-        trs.eq(0).prop('checked', true);
-        $(this).eq(0).addClass("tablechecked");
+            if ($(this).find("input").eq(0).is(':checked')) {
+                $(this).find("input").eq(0).prop('checked', false);
+                $(this).eq(0).removeClass("tablechecked");
+            } else {
+                var trs = $(this).find("input");
+                $(this).parent("tbody").find('tr input').prop('checked', false);
+                $(this).parent("tbody").find('tr').removeClass("tablechecked");
+                trs.eq(0).prop('checked', true);
+                $(this).eq(0).addClass("tablechecked");
             }
-    });
+            
+        });
+        $(".modifyTable").on('click',function () {
+                id = $('.tablechecked td').eq(1).text();
+                window.open('test.html' + '?tableId=' +id);
+            });
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

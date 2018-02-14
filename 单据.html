@@ -32,6 +32,13 @@
             left:90%;
             top:0;
         }
+        .operatedropdown{
+            width:60%;
+            margin:0 auto;
+        }
+        .operatedropdown .dropdown-menu{
+            width:auto;
+        }
     </style>
 </head>
 
@@ -86,34 +93,36 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">
+                    <button class="addTr">+</button>
+                    <button class="minusTr">-</button>
+                </th>
                 <td>
-                    <div class="nothing"></div>
                     <div class="operatedropdown">
                         <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
                         <ul class="dropdown-menu"  id="clientmenu">                           
                             <li class="dropdown-submenu">
                                 <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action</span>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="">123</a>
-                                    <a class="dropdown-item" href="#">An1231n</a>
-                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>
                                 </div>
                             </li>
                             <li class="dropdown-submenu">
                                 <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action2</span>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="">dfghdfg</a>
-                                    <a class="dropdown-item" href="#">An1231n</a>
-                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>
                                 </div>
                             </li>
                             <li class="dropdown-submenu">
                                 <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action3</span>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="">asdads</a>
-                                    <a class="dropdown-item" href="#">An1231n</a>
-                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>    
                                 </div>
                             </li>
                         </ul>
@@ -135,10 +144,44 @@
                 <td>@mdo</td>
             </tr>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
+                <th scope="row">
+                    <button class="addTr">+</button>
+                    <button class="minusTr">-</button>
+                </th>
                 <td>
-                    <input class="form-control" type="text" placeholder="价格" list="charge">
+                    <div class="operatedropdown">
+                        <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
+                        <ul class="dropdown-menu"  id="clientmenu">                           
+                            <li class="dropdown-submenu">
+                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>
+                                </div>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action2</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>
+                                </div>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action3</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item">123</a>
+                                    <a class="dropdown-item">456</a>
+                                    <a class="dropdown-item">789</a>    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </td>
+                <td>
+                    <input class="form-control btn-sm" type="text" placeholder="价格" list="charge">
                     <datalist id="charge">
                         <option value="11"></option>
                         <option value="21"></option>
@@ -147,10 +190,12 @@
                         <option value="51"></option>
                 </td>
                 <td>
-                    <input class="form-control" type="text" placeholder="数量">
+                    <input class="form-control btn-sm" type="text" placeholder="数量">
                 </td>
                 <td>@mdo</td>
             </tr>
+        </tbody>
+        <tfoot>
             <tr>
                 <td colspan="4" style="text-align:right">欠款:</td>
                 <td>Mark</td>
@@ -159,14 +204,32 @@
                 <td colspan="4" style="text-align:right">总价:</td>
                 <td>Mark</td>
             </tr>
-        </tbody>
+        </tfoot>
     </table>
     <textarea class="form-control " aria-label="With textarea" placeholder="备注信息"></textarea>
     <div class="saleFormSubmit">
         <button type="button" class="btn btn-outline-primary">提交</button>
     </div>
 </body>
-<script>      
+<script>
+        // $('.operatedropdown').on('click','input',function(){
+        //     if($(this).parent(".operatedropdown").find(".dropdown-menu").is(":hidden")){
+        //     menu = $(this).parent(".operatedropdown").find("ul li .dropdown-menu");
+        //     menu.hide();
+        //     $(this).parent(".operatedropdown").find(".dropdown-menu").show();
+        //     event.stopPropagation();  
+        //     }
+            
+        // });
+        $(document).ready(function(){
+        $("button.addTr").on('click',function(){
+            Tr = $(this).parents('tr').html();
+            Table = $(this).parents('tbody').html();
+            Table = Table+"<tr>"+Tr+"</tr>";
+            $(this).parents('tbody').html(Table);
+            event.stopPropagation();
+        });
+        });
         $('.subdropdown-item').on("click",function(){
             var menu = $(this).parent("li.dropdown-submenu").find(".dropdown-menu");
             if(menu.is(":visible")){
@@ -179,6 +242,10 @@
                 event.stopPropagation();
             }
         }); 
+        $('a.dropdown-item').on('click',function(){
+            var text = $(this).text();
+            $(this).parents('.operatedropdown').find('input').eq(0).val(text);
+        });
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

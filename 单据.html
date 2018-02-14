@@ -24,20 +24,24 @@
         table {
             text-align: center
         }
-        .dropdown-submenu{
+
+        .dropdown-submenu {
             position: relative;
         }
-        .dropdown-submenu .dropdown-menu{
+
+        .dropdown-submenu .dropdown-menu {
             position: absolute;
-            left:90%;
-            top:0;
+            left: 90%;
+            top: 0;
         }
-        .operatedropdown{
-            width:60%;
-            margin:0 auto;
+
+        .operatedropdown {
+            width: 60%;
+            margin: 0 auto;
         }
-        .operatedropdown .dropdown-menu{
-            width:auto;
+
+        .operatedropdown .dropdown-menu {
+            width: auto;
         }
     </style>
 </head>
@@ -100,7 +104,7 @@
                 <td>
                     <div class="operatedropdown">
                         <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
-                        <ul class="dropdown-menu"  id="clientmenu">                           
+                        <ul class="dropdown-menu" id="clientmenu">
                             <li class="dropdown-submenu">
                                 <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action</span>
                                 <div class="dropdown-menu">
@@ -122,7 +126,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item">123</a>
                                     <a class="dropdown-item">456</a>
-                                    <a class="dropdown-item">789</a>    
+                                    <a class="dropdown-item">789</a>
                                 </div>
                             </li>
                         </ul>
@@ -151,7 +155,7 @@
                 <td>
                     <div class="operatedropdown">
                         <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
-                        <ul class="dropdown-menu"  id="clientmenu">                           
+                        <ul class="dropdown-menu" id="clientmenu">
                             <li class="dropdown-submenu">
                                 <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action</span>
                                 <div class="dropdown-menu">
@@ -173,7 +177,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item">123</a>
                                     <a class="dropdown-item">456</a>
-                                    <a class="dropdown-item">789</a>    
+                                    <a class="dropdown-item">789</a>
                                 </div>
                             </li>
                         </ul>
@@ -212,40 +216,47 @@
     </div>
 </body>
 <script>
-        // $('.operatedropdown').on('click','input',function(){
-        //     if($(this).parent(".operatedropdown").find(".dropdown-menu").is(":hidden")){
-        //     menu = $(this).parent(".operatedropdown").find("ul li .dropdown-menu");
-        //     menu.hide();
-        //     $(this).parent(".operatedropdown").find(".dropdown-menu").show();
-        //     event.stopPropagation();  
-        //     }
-            
-        // });
-        $(document).ready(function(){
-        $("button.addTr").on('click',function(){
-            Tr = $(this).parents('tr').html();
-            Table = $(this).parents('tbody').html();
-            Table = Table+"<tr>"+Tr+"</tr>";
-            $(this).parents('tbody').html(Table);
+    // $('.operatedropdown').on('click','input',function(){
+    //     if($(this).parent(".operatedropdown").find(".dropdown-menu").is(":hidden")){
+    //     menu = $(this).parent(".operatedropdown").find("ul li .dropdown-menu");
+    //     menu.hide();
+    //     $(this).parent(".operatedropdown").find(".dropdown-menu").show();
+    //     event.stopPropagation();  
+    //     }
+
+    // });
+
+    //点击按钮增加一行表单
+    $(document).ready(function () {
+        $("tbody").on('click', "button.addTr", function () {
+            var Tr = $(this).parents('tr').html();
+            Tr = "<tr>" + Tr + "</tr>";
+            $(this).parents('tbody').append(Tr);
+        });
+        $("tbody").on('click', "button.minusTr", function () {
+            var Tr = $(this).parents('tr').eq(0);
+            Tr.remove();
+        });
+    });
+
+
+    //显示隐藏2级dropdown-menu
+    $('tbody').on("click","span.subdropdown-item", function () {
+        var menu = $(this).parent("li.dropdown-submenu").find(".dropdown-menu");
+        if (menu.is(":visible")) {
+            menu.hide();
             event.stopPropagation();
-        });
-        });
-        $('.subdropdown-item').on("click",function(){
-            var menu = $(this).parent("li.dropdown-submenu").find(".dropdown-menu");
-            if(menu.is(":visible")){
-                menu.hide();
-                event.stopPropagation();
-            }
-            else{
-                $(this).parents("ul.dropdown-menu").find("li .dropdown-menu").hide();
-                menu.show();
-                event.stopPropagation();
-            }
-        }); 
-        $('a.dropdown-item').on('click',function(){
-            var text = $(this).text();
-            $(this).parents('.operatedropdown').find('input').eq(0).val(text);
-        });
+        } else {
+            $(this).parents("ul.dropdown-menu").find("li .dropdown-menu").hide();
+            menu.show();
+            event.stopPropagation();
+        }
+    });
+    //将2级表单中的value显示到input
+    $('tbody').on('click', "a.dropdown-item",function () {
+        var text = $(this).text();
+        $(this).parents('.operatedropdown').find('input').eq(0).val(text);
+    });
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

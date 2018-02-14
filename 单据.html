@@ -12,13 +12,25 @@
         crossorigin="anonymous">
     <title>Hello, world!</title>
     <style>
-        .saleFormSubmit{
-            margin-top:10px;
+        .saleFormSubmit {
+            margin-top: 10px;
         }
-        .saleFormSubmit>button{
+
+        .saleFormSubmit>button {
             position: relative;
             left: 50%
-            
+        }
+
+        table {
+            text-align: center
+        }
+        .dropdown-submenu{
+            position: relative;
+        }
+        .dropdown-submenu .dropdown-menu{
+            position: absolute;
+            left:90%;
+            top:0;
         }
     </style>
 </head>
@@ -65,43 +77,104 @@
     <table class="table table-sm">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">商品</th>
-                <th scope="col">价格</th>
-                <th scope="col">数量</th>
+                <th scope="col" style="width:7%;">价格</th>
+                <th scope="col" style="width:7%;">数量</th>
                 <th scope="col">总价</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>
+                    <div class="nothing"></div>
+                    <div class="operatedropdown">
+                        <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
+                        <ul class="dropdown-menu"  id="clientmenu">                           
+                            <li class="dropdown-submenu">
+                                <span class="subdropdown-item" href="" data-toggle="dropdown">Action</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="">123</a>
+                                    <a class="dropdown-item" href="#">An1231n</a>
+                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                </div>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <span class="subdropdown-item" href="" data-toggle="dropdown">Action2</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="">dfghdfg</a>
+                                    <a class="dropdown-item" href="#">An1231n</a>
+                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                </div>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <span class="subdropdown-item" href="" data-toggle="dropdown">Action3</span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="">asdads</a>
+                                    <a class="dropdown-item" href="#">An1231n</a>
+                                    <a class="dropdown-item" href="#">Som12321here</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </td>
+                <td>
+                    <input class="form-control btn-sm" type="text" placeholder="价格" list="charge">
+                    <datalist id="charge">
+                        <option value="11"></option>
+                        <option value="21"></option>
+                        <option value="31"></option>
+                        <option value="41"></option>
+                        <option value="51"></option>
+                </td>
+                <td>
+                    <input class="form-control btn-sm" type="text" placeholder="数量">
+                </td>
                 <td>@mdo</td>
             </tr>
             <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>
+                    <input class="form-control" type="text" placeholder="价格" list="charge">
+                    <datalist id="charge">
+                        <option value="11"></option>
+                        <option value="21"></option>
+                        <option value="31"></option>
+                        <option value="41"></option>
+                        <option value="51"></option>
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="数量">
+                </td>
                 <td>@mdo</td>
             </tr>
             <tr>
-                    <td colspan="4">欠款：</td>
-                    <td>Mark</td>
-                </tr>
-            <tr>
-                <td colspan="4">总价</td>
+                <td colspan="4" style="text-align:right">欠款:</td>
                 <td>Mark</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:right">总价:</td>
+                <td>Mark</td>
+            </tr>
         </tbody>
     </table>
-    <textarea class="form-control" aria-label="With textarea" placeholder="备注信息"></textarea>
+    <textarea class="form-control " aria-label="With textarea" placeholder="备注信息"></textarea>
     <div class="saleFormSubmit">
-    <button type="button" class="btn btn-outline-primary">提交</button>
-</div>
+        <button type="button" class="btn btn-outline-primary">提交</button>
+    </div>
 </body>
+<script>      
+        $('.subdropdown-item').on("click",function(){
+            $(this).parents("ul.dropdown-menu").find("li .dropdown-menu").hide();
+            var menu = $(this).parent("li.dropdown-submenu").find(".dropdown-menu")
+            if(menu.is(show))
+            $(this).parent("li.dropdown-submenu").find(".dropdown-menu").toggle();
+            event.stopPropagation();
+        }); 
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

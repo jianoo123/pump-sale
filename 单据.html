@@ -92,7 +92,7 @@
                 <th scope="col">商品</th>
                 <th scope="col" style="width:7%;">价格</th>
                 <th scope="col" style="width:7%;">数量</th>
-                <th scope="col">总价</th>
+                <th scope="col" style="width:12%;">总价</th>
             </tr>
         </thead>
         <tbody>
@@ -134,7 +134,7 @@
                     </div>
                 </td>
                 <td>
-                    <input class="form-control btn-sm" type="text" placeholder="价格" list="charge">
+                    <input class="form-control btn-sm tableCharge" type="text" placeholder="价格..." list="charge">
                     <datalist id="charge">
                         <option value="11"></option>
                         <option value="21"></option>
@@ -143,70 +143,25 @@
                         <option value="51"></option>
                 </td>
                 <td>
-                    <input class="form-control btn-sm" type="text" placeholder="数量">
+                    <input class="form-control btn-sm tableNums" type="text" placeholder="数量...">
                 </td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <button class="addTr">+</button>
-                    <button class="minusTr">-</button>
-                </th>
-                <td>
-                    <div class="operatedropdown">
-                        <input id="merchant" type="text" name="merchant" class="dropdown-toggle form-control btn-sm" data-toggle="dropdown" placeholder="请选择商品...">
-                        <ul class="dropdown-menu" id="clientmenu">
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action</span>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item">123</a>
-                                    <a class="dropdown-item">456</a>
-                                    <a class="dropdown-item">789</a>
-                                </div>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action2</span>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item">123</a>
-                                    <a class="dropdown-item">456</a>
-                                    <a class="dropdown-item">789</a>
-                                </div>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-item subdropdown-item" href="" data-toggle="dropdown">Action3</span>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item">123</a>
-                                    <a class="dropdown-item">456</a>
-                                    <a class="dropdown-item">789</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
+                <td >
+                	<input class="form-control btn-sm productsAllAdd" type="text" placeholder="总价...">
                 </td>
-                <td>
-                    <input class="form-control btn-sm tableCharge" type="text" placeholder="价格" list="charge">
-                    <datalist id="charge">
-                        <option value="11"></option>
-                        <option value="21"></option>
-                        <option value="31"></option>
-                        <option value="41"></option>
-                        <option value="51"></option>
-                </td>
-                <td>
-                    <input class="form-control btn-sm tableNums" type="text" placeholder="数量">
-                </td>
-                <td class="productsAllAdd"></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="4" style="text-align:right">欠款:</td>
-                <td class="ownMoney">Mark</td>
+                <td>
+                	<input class="form-control btn-sm ownMoney" type="text" placeholder="欠款...">
+                </td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align:right">总价:</td>
-                <td class="allAdd">Mark</td>
+                <td>
+                	<input class="form-control btn-sm allAdd" type="text" placeholder="退货总价...">
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -229,10 +184,17 @@
     	var tr = $(this).parents('tr');
     	var charge = Number(tr.find('td input.tableCharge').val());
     	var number = Number(tr.find('td input.tableNums').val());
-    	var adds = charge + number;
-    	var productsAllAdd = $(this).parents('tr').find('td.productsAllAdd');
-    	productsAllAdd.text(adds);
-    })
+    	var adds = charge * number;
+    	var productsAllAdd = $(this).parents('tr').find('input.productsAllAdd');
+    	if(charge=='' || number==''){
+    		productsAllAdd.val(0);
+    	}
+    	else{
+    		productsAllAdd.val(adds);
+    	};
+    	
+    	addAll = $(this).parents('table').find('tfoot tr td input.allAdd')
+    });
 
     //点击按钮增加一行表单
     $(document).ready(function () {

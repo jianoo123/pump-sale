@@ -185,7 +185,7 @@
                     </div>
                 </td>
                 <td>
-                    <input class="form-control btn-sm" type="text" placeholder="价格" list="charge">
+                    <input class="form-control btn-sm tableCharge" type="text" placeholder="价格" list="charge">
                     <datalist id="charge">
                         <option value="11"></option>
                         <option value="21"></option>
@@ -194,19 +194,19 @@
                         <option value="51"></option>
                 </td>
                 <td>
-                    <input class="form-control btn-sm" type="text" placeholder="数量">
+                    <input class="form-control btn-sm tableNums" type="text" placeholder="数量">
                 </td>
-                <td>@mdo</td>
+                <td class="productsAllAdd"></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="4" style="text-align:right">欠款:</td>
-                <td>Mark</td>
+                <td class="ownMoney">Mark</td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align:right">总价:</td>
-                <td>Mark</td>
+                <td class="allAdd">Mark</td>
             </tr>
         </tfoot>
     </table>
@@ -225,6 +225,14 @@
     //     }
 
     // });
+    $('tbody').on('change','input',function(){
+    	var tr = $(this).parents('tr');
+    	var charge = Number(tr.find('td input.tableCharge').val());
+    	var number = Number(tr.find('td input.tableNums').val());
+    	var adds = charge + number;
+    	var productsAllAdd = $(this).parents('tr').find('td.productsAllAdd');
+    	productsAllAdd.text(adds);
+    })
 
     //点击按钮增加一行表单
     $(document).ready(function () {
@@ -260,8 +268,7 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 

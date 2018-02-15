@@ -192,7 +192,12 @@
     	else{
     		productsAllAdd.val(adds);
     	};
-    	
+    	allInputs = $(this).parents('tbody').find('tr td input.productsAllAdd')
+    	addAll = 0
+    	for(i=0;i<allInputs.length;i++)
+    	{
+    		addAll += allInputs[i].val()
+    	}
     	addAll = $(this).parents('table').find('tfoot tr td input.allAdd')
     });
 

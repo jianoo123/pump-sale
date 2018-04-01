@@ -1,0 +1,28 @@
+class point = 起点(x,y)
+class distance = 起点到终点距离（f,g,h）
+list open
+list closed
+把起点加入closed列表
+width = 地图长度
+heigth = 地图高度
+max_x = 游戏内最大x坐标
+max_y = 游戏内最大y坐标
+每个格子的宽度 = width/max_x
+每个格子的高度 = heigth/max_y
+while(point != 终点)
+	lists = point所有相邻的坐标点
+	for(list in lists):
+		if list in closed||list 不可行走:
+			continue
+		else:
+			计算list的f,g,h值
+			将list加入open表
+			list的father指向point
+		else list在open表内：
+			if list.f = min(open):
+				closed.append(point)
+				point = list
+
+
+			
+			
